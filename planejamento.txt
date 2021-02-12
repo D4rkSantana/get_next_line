@@ -1,0 +1,89 @@
+ETAPAS:
+
+- Ler o arquivo
+
+- identificar as quebras de linha
+
+- setar buffer
+
+- Salvar a posição atual
+
+-
+
+
+Nome da função:     get_next_line
+
+Protótipo:          int get_next_line (int fd, char ** linha);
+
+Entregar arquivos:  get_next_line.c, get_next_line_utils.c,
+                    get_next_line.h
+
+Parâmetros:         # 1. descritor de arquivo para leitura
+                    # 2. O valor do que foi lido
+
+Valor de retorno:   1: Uma linha foi lida
+                    0: EOF foi alcançado
+                    -1: Ocorreu um erro
+
+Funções externas:   read, malloc, free
+
+Descrição:          Escreva uma função que retorna uma linha lida de um
+                    descritor de arquivo, sem a nova linha.
+
+Resumo:             O objetivo deste projeto é fazer com que você codifique uma função que retorna uma linha
+                    terminando com uma nova linha, leia a partir de um descritor de arquivo.
+
+Metas:              Este projeto não só permitirá que você adicione uma função muito conveniente à sua coleção,
+                    mas também permitirá que você aprenda um novo conceito altamente interessante em programação C:
+                    variáveis estáticas
+
+=========================================================================
+
+• Chamar sua função get_next_line em um loop permitirá que você leia o texto
+disponível em um descritor de arquivo, uma linha de cada vez, até o EOF.
+
+• Certifique-se de que sua função se comporte bem ao ler um arquivo e quando
+lê a partir da entrada padrão.
+
+• libft não é permitido para este projeto. Você deve adicionar um arquivo get_next_line_utils.c que conterá as 
+funções que são necessárias para o seu get_next_line funcionar.
+
+• Seu programa deve ser compilado com o sinalizador -D BUFFER_SIZE = xx. que será usado
+como o tamanho do buffer para as chamadas de leitura em get_next_line. Este valor será
+modificado por seus avaliadores e por moulinette.
+
+• A compilação será feita desta forma: gcc -Wall -Wextra -Werror -D BUFFER_SIZE = 32
+get_next_line.c get_next_line_utils.c
+
+• Sua leitura deve usar o BUFFER_SIZE definido durante a compilação para ler
+um arquivo ou de stdin.
+
+• No arquivo de cabeçalho get_next_line.h você deve ter pelo menos o protótipo do
+função get_next_line.
+
+=========================================================================
+
+***Sua função ainda funciona se o valor BUFFER_SIZE for 9999? E
+se o valor BUFFER_SIZE for 1? E 10000000? Você sabe por quê?***
+
+*** Você deve tentar ler o mínimo possível cada vez que get_next_line
+é chamado. Se você encontrar uma nova linha, você deve retornar o
+linha atual. Não leia o arquivo inteiro e depois processe cada linha. ***
+
+*** Não entregue seu projeto sem testar. Existem muitos testes para
+corra, cubra suas bases. Tente ler de um arquivo, de um redirecionamento,
+da entrada padrão. Como seu programa se comporta quando você envia um
+newline para a saída padrão? E CTRL-D? ***
+
+=========================================================================
+
+• Consideramos que get_next_line tem um comportamento indefinido se, entre duas chamadas,
+o mesmo descritor de arquivo muda para um arquivo diferente antes que EOF seja alcançado em
+o primeiro fd.
+
+• lseek não é uma função permitida. A leitura do arquivo deve ser feita apenas uma vez.
+
+• Finalmente, consideramos que get_next_line tem um comportamento indefinido durante a leitura
+de um arquivo binário. No entanto, se desejar, você pode tornar esse comportamento coerente.
+
+• Variáveis globais são proibidas.
