@@ -5,6 +5,8 @@
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 
+size_t	ft_strlen(const char *s);
+
 static int  linebreak(char * str){
     int count;
 
@@ -34,7 +36,7 @@ static size_t leitor(int fd){
     x = 32;
     buff = malloc(sizeof(char) * x);
     resultado = read(fd, buff, x);
-    printf("==Resultado: %ld ==\n", resultado);
+    printf("==Resultado: %d ==\n", resultado);
     //=========================================
     //Pesquisa da posição da primeira quebra de linha
     //=========================================
@@ -48,6 +50,8 @@ static size_t leitor(int fd){
     //=========================================
     //Apresentação dos valores
     //=========================================
+    i = ft_strlen(buff);
+    printf("\nStrlen: %d", i);
     printf("\nBuff: %s", buff);
     printf("\nBuff_line: %s", buff_line);
     printf("\n==Fim do programa==\n");
@@ -67,7 +71,27 @@ int main(){
     close(fd);
     return (0);
 }
-
+/*
+static int ft_strindex(char * dst, char * str, size_t index){
+	int count;
+	int size;
+	
+	count = 0;
+	size = ft_strlen(str) - index;
+	if (index < 1)
+	    return (-1);
+	if (str == NULL)
+	    return (-1);
+	dst = malloc(sizeof(char) * size + 1);
+	while (index < size){
+	    dst[count] = str[index];
+	    index++;
+	    count++;
+	}
+	dst[count] = '\0';
+	return (count);
+}
+*/
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t	count;
@@ -88,4 +112,14 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	}
 	dst[count] = '\0';
 	return (len);
+}
+
+size_t	ft_strlen(const char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }
