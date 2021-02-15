@@ -1,14 +1,18 @@
 ETAPAS:
 
-- Ler o arquivo
+- Ler o arquivo ---ok
 
-- identificar as quebras de linha
+- identificar as quebras de linha ---ok
 
-- setar buffer
+- setar buffer ---ok
 
-- Salvar a posição atual
+- Salvar a posição atual ---ok
 
--
+- Criar função para salvar e recuperar buffer
+
+- função de leitura
+
+- loop de leitura
 
 
 Nome da função:     get_next_line

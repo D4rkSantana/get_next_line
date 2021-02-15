@@ -7,6 +7,8 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 
 size_t	ft_strlen(const char *s);
 
+int ft_strindexcpy(char * dst, const char * str, size_t index);
+
 static int  linebreak(char * str){
     int count;
 
@@ -27,8 +29,10 @@ static size_t leitor(int fd){
     size_t  resultado;
     char    *buff;
     char    *buff_line;
+    char    *save;
     int     x;
     int     i;
+    int     aux;
 
     //=========================================
     //Alocação do buff e leitura
@@ -36,25 +40,32 @@ static size_t leitor(int fd){
     x = 32;
     buff = malloc(sizeof(char) * x);
     resultado = read(fd, buff, x);
-    printf("==Resultado: %d ==\n", resultado);
+    printf("Retorno read: %ld\n------------", resultado);
     //=========================================
     //Pesquisa da posição da primeira quebra de linha
     //=========================================
     i = linebreak(buff);
-    printf("\n==Retorno: %d ==", i);
+    printf("\nRetorno do linebreak: %d", i);
+    aux = ft_strindexcpy(save, buff, i);
+    printf("\nRetorno do strindexcpy: %d", aux);
+    printf("\nSave: %s\n------------\n", save);
     //=========================================
     //Alocação da memoria para o buff de linha e copia
     //=========================================
     buff_line = malloc(sizeof(char) * i);
-    ft_strlcpy(buff_line, buff, i + 1);
+    ft_strlcpy(buff_line, buff, i + 1);//ssss
     //=========================================
     //Apresentação dos valores
     //=========================================
     i = ft_strlen(buff);
-    printf("\nStrlen: %d", i);
+    printf("\nStrlen do buff: %d", i);
+    i = ft_strlen(buff_line);
+    printf("\nStrlen do buff_line: %d", i);
+    i = ft_strlen(save);
+    printf("\nStrlen do save: %d\n------------", i);
     printf("\nBuff: %s", buff);
     printf("\nBuff_line: %s", buff_line);
-    printf("\n==Fim do programa==\n");
+    printf("\nSave: %s\n------------\n", save);
     //=========================================
     //Finalização
     //=========================================
@@ -62,36 +73,34 @@ static size_t leitor(int fd){
     free(buff_line);
     return (resultado);
 }
+int ft_strindexcpy(char * dst, const char * str, size_t index){
+	int count;
+	int size;
+
+	count = 0;
+	if (str == NULL)
+	    return (-1);
+	dst = malloc(sizeof(char) * (ft_strlen(str) - index) + 1);
+	while (count < ft_strlen(str) && index < ft_strlen(str)){
+	    dst[count] = str[index];
+        //printf("\ndst: %c = str: %c", dst[count], str[index]);
+	    index++;
+	    count++;
+	}
+    dst[count] = '\0';
+    //printf("\nDST: %s", dst);
+	return (count);
+}
 int main(){
     int fd;
 
-    printf("==Teste==\n");
+    //printf("==Teste==\n");
     fd = open("texto.txt", O_RDONLY);
     leitor(fd);
     close(fd);
     return (0);
 }
-/*
-static int ft_strindex(char * dst, char * str, size_t index){
-	int count;
-	int size;
-	
-	count = 0;
-	size = ft_strlen(str) - index;
-	if (index < 1)
-	    return (-1);
-	if (str == NULL)
-	    return (-1);
-	dst = malloc(sizeof(char) * size + 1);
-	while (index < size){
-	    dst[count] = str[index];
-	    index++;
-	    count++;
-	}
-	dst[count] = '\0';
-	return (count);
-}
-*/
+
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t	count;
