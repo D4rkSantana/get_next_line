@@ -6,7 +6,7 @@
 /*   By: esilva-s <esilva-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 11:42:10 by esilva-s          #+#    #+#             */
-/*   Updated: 2021/02/16 15:12:02 by esilva-s         ###   ########.fr       */
+/*   Updated: 2021/02/16 16:48:50 by esilva-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static char * ft_strindexcpy(const char * str, size_t index){
 	return (dst);
 }
 
-int get_next_line(int fd){
+int get_next_line(int fd, char **line){
     static char * save;
     char        * buff;
     char        * buff_total;
@@ -61,7 +61,8 @@ int get_next_line(int fd){
 
     buffer_size = 32;
     return_read = 1;
-    buff = malloc(sizeof(char) * buffer_size);
+    if(!(buff = malloc(sizeof(char) * buffer_size)))
+        return (-1);
 
     //confirma se existe algum backup
     //caso tenha, ele copia para o buff e buff_total
@@ -107,5 +108,6 @@ int get_next_line(int fd){
 
     free(buff);
     free(buff_total);
-    free(result);
+    *line = result;
+    return (1);
 }

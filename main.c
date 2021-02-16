@@ -2,9 +2,13 @@
 
 int main(){
     int fd;
+    char *line;
 
+    *line = 0;
     fd = open("texto.txt", O_RDONLY);
-    get_next_line(fd);
+    //while()
+    get_next_line(fd, &line);
+    printf("Resultado final: %s|", line);
     close(fd);
     return (0);
 }

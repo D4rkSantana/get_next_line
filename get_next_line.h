@@ -6,7 +6,7 @@
 /*   By: esilva-s <esilva-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 11:42:39 by esilva-s          #+#    #+#             */
-/*   Updated: 2021/02/16 14:52:25 by esilva-s         ###   ########.fr       */
+/*   Updated: 2021/02/16 15:30:26 by esilva-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-int get_next_line(int fd);
+int get_next_line(int fd, char **line);
 
 //int get_next_line_teste(int fd);
 
