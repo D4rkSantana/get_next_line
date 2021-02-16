@@ -6,7 +6,7 @@
 /*   By: esilva-s <esilva-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 11:42:39 by esilva-s          #+#    #+#             */
-/*   Updated: 2021/02/15 14:16:57 by esilva-s         ###   ########.fr       */
+/*   Updated: 2021/02/16 14:52:25 by esilva-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,16 @@
 
 int get_next_line(int fd);
 
+//int get_next_line_teste(int fd);
+
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 
 size_t	ft_strlen(const char *s);
 
-char * ft_strindexcpy(const char * str, size_t index);
+char    *ft_strjoin_free1(char *s1, char const *s2);
 
-int  linebreak(char * str);
+char	*ft_strdup(const char *s1);
 
 #endif

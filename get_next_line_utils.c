@@ -1,23 +1,13 @@
 #include "get_next_line.h"
 
-char * ft_strindexcpy(const char * str, size_t index){
-	int count;
-	int size;
-	char * dst;
+size_t	ft_strlen(const char *s)
+{
+	int	i;
 
-	//=========================================
-	//Essa função copia uma string a partir do
-	//index passado até o fim
-	//=========================================
-	count = 0;
-	dst = malloc(sizeof(char) * (ft_strlen(str) - index));
-	while (count < ft_strlen(str) && index < ft_strlen(str)){
-	    dst[count] = str[index];
-	    index++;
-	    count++;
-	}
-    dst[count] = '\0';
-	return (dst);
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
@@ -42,29 +32,66 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	return (len);
 }
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	int	i;
+	size_t	i;
+	size_t	j;
+	size_t	dstlen;
+	size_t	srclen;
 
 	i = 0;
-	while (s[i])
+	j = 0;
+	dstlen = ft_strlen(dst);
+	srclen = ft_strlen(src);
+	if (dstsize <= dstlen)
+		return (srclen + dstsize);
+	while (dst[i] != '\0' && i < (dstsize - 1))
 		i++;
-	return (i);
+	while (src[j] && i + j + 1 < dstsize)
+	{
+		dst[i + j] = src[j];
+		j++;
+	}
+	dst[i + j] = '\0';
+	return (dstlen + srclen);
 }
 
-int  linebreak(char * str){
-    int count;
+char	*ft_strjoin_free1(char *s1, char const *s2){
+	unsigned int	size;
+	unsigned int	size1;
+	unsigned int	size2;
+	char			*new;
 
-    //=========================================
-    //Faz a leitura até achar a quebra de linha
-    // e retorna a posição
-    //=========================================
-    count = 0;
-    while (str[count])
-    {
-        if(str[count] == '\n')
-            return (count + 1);
-        count++;
-    }
-    return(-1);
+	if (!s1 || !s2)
+		return (NULL);
+	size1 = ft_strlen(s1);
+	size2 = ft_strlen(s2);
+	size = size1 + size2 + 1;
+	if (!(new = malloc(sizeof(char) * size)))
+		return (NULL);
+	ft_strlcpy(new, s1, size1 + 1);
+	ft_strlcat(new + size1, s2, size2 + 1);
+	free(s1);
+	return (new);
+}
+
+char	*ft_strdup(const char *s1)
+{
+	char	*dest;
+	int		x;
+	int		size;
+
+	while (s1[size])
+		size++;
+	dest = (char *)malloc(sizeof(char) * (size + 1));
+	if (!(dest))
+		return (NULL);
+	x = 0;
+	while (s1[x])
+	{
+		dest[x] = s1[x];
+		x++;
+	}
+	dest[x] = '\0';
+	return (dest);
 }

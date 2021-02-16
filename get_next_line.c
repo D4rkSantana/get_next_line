@@ -6,68 +6,106 @@
 /*   By: esilva-s <esilva-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 11:42:10 by esilva-s          #+#    #+#             */
-/*   Updated: 2021/02/15 16:52:24 by esilva-s         ###   ########.fr       */
+/*   Updated: 2021/02/16 15:12:02 by esilva-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdlib.h>
-/*
-static void save(){
-    //=========================================
-    //Essa função salva o restante de um buffer
-    //ou retorna o que ja foi salvo anteriormente
-    //=========================================
-    satatic char * save;
 
+static int  linebreak(char * str){
+    int count;
+
+    //=========================================
+    //Faz a leitura até achar a quebra de linha
+    // e retorna a posição
+    //=========================================
+    count = 0;
+    while (str[count])
+    {
+        if(str[count] == '\n')
+            return (count + 1);
+        count++;
+    }
+    return(-1);
 }
-*/
+
+static char * ft_strindexcpy(const char * str, size_t index){
+	int count;
+	int size;
+	char * dst;
+
+	//=========================================
+	//Essa função copia uma string a partir do
+	//index passado até o fim
+	//=========================================
+	count = 0;
+	dst = malloc(sizeof(char) * (ft_strlen(str) - index));
+	while (count < ft_strlen(str) && index < ft_strlen(str)){
+	    dst[count] = str[index];
+	    index++;
+	    count++;
+	}
+    dst[count] = '\0';
+	return (dst);
+}
 
 int get_next_line(int fd){
-    size_t  resultado;
-    char    * buff;
-    char    * buff_line;
-    char    * save;
-    int     x;
-    int     i;
+    static char * save;
+    char        * buff;
+    char        * buff_total;
+    char        * result;
+    int         return_read;
+    int         index_n;
+    int         buffer_size;
 
-    //=========================================
-    //Alocação do buff e leitura
-    //=========================================
-    x = 40;
-    //save = 0;
-    buff = malloc(sizeof(char) * x);
-    resultado = read(fd, buff, x);
-    printf("------------\nRetorno read: %ld\n------------", resultado);
+    buffer_size = 32;
+    return_read = 1;
+    buff = malloc(sizeof(char) * buffer_size);
 
-    //=========================================
-    //Pesquisa da posição da primeira quebra de linha
-    //=========================================
-    i = linebreak(buff);
-    printf("\nRetorno do linebreak: %d", i);
-    save = ft_strindexcpy(buff, i);
+    //confirma se existe algum backup
+    //caso tenha, ele copia para o buff e buff_total
+    //caso não tenha, ele lê com read e passa para o buff_total
+    if (save != NULL){
+        ft_strlcpy(buff, save, ft_strlen(save));
+        buff_total = ft_strdup(buff);
+        printf("1-Buff: %s\n", buff);
+        printf("1-Buff_total: %s\n", buff_total);
+    }else {
+        return_read = read(fd, buff, buffer_size);
+        buff_total = ft_strdup(buff);
+        printf("2-Buff: %s\n", buff);
+        printf("2-Buff_total: %s\n", buff_total);
+    }
 
-    //=========================================
-    //Alocação da memoria para o buff de linha e copia
-    //=========================================
-    buff_line = malloc(sizeof(char) * i);
-    ft_strlcpy(buff_line, buff, i + 1);//ssss
+    //no while ele verifica se existe um \n dentro de total
+    //se não existir ele executa o loop lendo uma nova quantidade
+    //de cacharacteres e adicionando ao buffer_total
+    printf("---------------\n");
+    while (linebreak(buff_total) == -1 && return_read > 0){
+        return_read = read(fd, buff, buffer_size);
+        printf("return_read: %d\n", return_read);
+        buff_total = ft_strjoin_free1(buff_total, buff);
+        printf("Buff_total: %s\n", buff_total);
+    }
 
-    //=========================================
-    //Apresentação dos valores
-    //=========================================
-    printf("\nStrlen do buff: %ld", ft_strlen(buff));
-    printf("\nStrlen do buff_line: %ld", ft_strlen(buff_line));
-    printf("\nStrlen do save: %ld\n------------", ft_strlen(save));
-    printf("\nBuff: %s|", buff);
-    printf("\nBuff_line: %s|", buff_line);
-    printf("\nSave: %s|\n------------\n", save);
+    //verifica a posição da quebra se linha
+    index_n = linebreak(buff_total);
+    //copia até a quebra
+    result = malloc(sizeof(char) * index_n + 1);
+    ft_strlcpy(result, buff_total, index_n + 1);
+    //salva o restante no statico
+    save = ft_strindexcpy(buff_total, index_n);
 
-    //=========================================
-    //Finalização
-    //=========================================
-    free (buff);
-    free (buff_line);
-    free (save);
-    return (resultado);
+    //Resultados
+    printf("---------------\n");
+    printf("Index_n: %d\n", index_n);
+    printf("Buff: %s\n", buff);
+    printf("Buff_total: %s\n", buff_total);
+    printf("Save: %s\n", save);
+    printf("Result: %s|\n", result);
+
+    free(buff);
+    free(buff_total);
+    free(result);
 }
