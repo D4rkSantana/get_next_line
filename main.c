@@ -2,13 +2,18 @@
 
 int main(){
     int fd;
+    int retorno;
     char *line;
 
     *line = 0;
+    retorno = 1;
     fd = open("texto.txt", O_RDONLY);
-    //while()
-    get_next_line(fd, &line);
-    printf("Resultado final: %s|", line);
+    while(retorno){
+        retorno = get_next_line(fd, &line);
+        printf("Resultado: %s|\n", line);
+        printf("Retorno: %d\n-----\n", retorno);
+    }
+    //printf("Resultado final: %s|", line);
     close(fd);
     return (0);
 }
