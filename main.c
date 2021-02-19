@@ -11,7 +11,7 @@ int main(){
     while(retorno){
         retorno = get_next_line(fd, &line);
         printf("Resultado: %s|\n", line);
-        printf("Retorno: %d\n-----\n", retorno);
+        printf("Retorno: %d\n==========\n", retorno);
     }
     //printf("Resultado final: %s|", line);
     close(fd);

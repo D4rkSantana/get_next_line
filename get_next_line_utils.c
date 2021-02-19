@@ -56,7 +56,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	return (dstlen + srclen);
 }
 
-char	*ft_strjoin_free1(char *s1, char const *s2){
+char	*ft_strjoin_free1(char *s1, char const *s2, size_t sz2){
 	unsigned int	size;
 	unsigned int	size1;
 	unsigned int	size2;
@@ -66,8 +66,10 @@ char	*ft_strjoin_free1(char *s1, char const *s2){
 		return (NULL);
 	size1 = ft_strlen(s1);
 	size2 = ft_strlen(s2);
+	if(sz2 > 0)
+		size2 = sz2;
 	size = size1 + size2 + 1;
-	if (!(new = malloc(sizeof(char) * size)))
+	if (!(new = (char *)malloc(sizeof(char) * size)))
 		return (NULL);
 	ft_strlcpy(new, s1, size1 + 1);
 	ft_strlcat(new + size1, s2, size2 + 1);

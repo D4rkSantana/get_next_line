@@ -6,7 +6,7 @@
 /*   By: esilva-s <esilva-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 11:42:39 by esilva-s          #+#    #+#             */
-/*   Updated: 2021/02/16 15:30:26 by esilva-s         ###   ########.fr       */
+/*   Updated: 2021/02/19 15:32:06 by esilva-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 
 size_t	ft_strlen(const char *s);
 
-char    *ft_strjoin_free1(char *s1, char const *s2);
+char    *ft_strjoin_free1(char *s1, char const *s2, size_t sz2);
 
 char	*ft_strdup(const char *s1);
 
