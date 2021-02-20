@@ -5,7 +5,7 @@ int main(){
     int retorno;
     char *line;
 
-    *line = 0;
+    //*line = 0;
     retorno = 1;
     fd = open("texto.txt", O_RDONLY);
     while(retorno){
