@@ -91,3 +91,38 @@ o primeiro fd.
 de um arquivo binário. No entanto, se desejar, você pode tornar esse comportamento coerente.
 
 • Variáveis globais são proibidas.
+
+/*
+    return_read = 1;
+    if(!(buff = (char *)malloc(sizeof(char) * buffer_size)))
+        return (-1);
+
+    if (save != NULL){
+        ft_strlcpy(buff, save, ft_strlen(save) + 1);
+        buff_total = ft_strdup(buff);
+    }else {
+        return_read = read(fd, buff, buffer_size);
+        buff_total = ft_strdup(buff);
+    }
+    while (linebreak(buff_total) == -1 && return_read > 0){
+
+        free(buff);
+        if(!(buff = (char *)malloc(sizeof(char) * buffer_size)))
+            return (-1);
+        return_read = read(fd, buff, buffer_size);
+        if(return_read >= 1)
+            buff_total = ft_strjoin_free1(buff_total, buff, return_read);
+    }
+    */
+    /*
+    //verifica a posição da quebra se linha
+    if (return_read >= 1)
+        index_n = linebreak(buff_total);
+    else {
+        index_n = ft_strlen(buff_total);
+    }
+    //copia até a quebra
+    result = (char *)malloc(sizeof(char) * index_n + 1);
+    ft_strlcpy(result, buff_total, index_n + 1);
+    */
+    //salva o restante no statico
