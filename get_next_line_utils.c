@@ -10,7 +10,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t	count;
 	size_t	len;
@@ -32,7 +32,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	return (len);
 }
 
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
+size_t		ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
 	size_t	i;
 	size_t	j;
@@ -56,7 +56,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	return (dstlen + srclen);
 }
 
-char	*ft_strjoin_free1(char *s1, char const *s2, size_t sz2){
+char				*ft_strjoin_free1(char *s1, char const *s2, size_t sz2){
 	unsigned int	size;
 	unsigned int	size1;
 	unsigned int	size2;
@@ -66,7 +66,7 @@ char	*ft_strjoin_free1(char *s1, char const *s2, size_t sz2){
 		return (NULL);
 	size1 = ft_strlen(s1);
 	size2 = ft_strlen(s2);
-	if(sz2 > 0)
+	if (sz2 > 0)
 		size2 = sz2;
 	size = size1 + size2 + 1;
 	if (!(new = (char *)malloc(sizeof(char) * size)))
@@ -77,7 +77,7 @@ char	*ft_strjoin_free1(char *s1, char const *s2, size_t sz2){
 	return (new);
 }
 
-char	*ft_strdup(const char *s1)
+char		*ft_strdup(const char *s1)
 {
 	char	*dest;
 	int		x;
