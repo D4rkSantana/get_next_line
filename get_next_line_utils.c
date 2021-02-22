@@ -2,7 +2,7 @@
 
 size_t	ft_strlen(const char *s)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (s[i])
@@ -66,13 +66,16 @@ char				*ft_strjoin_free1(char *s1, char const *s2, size_t sz2){
 		return (NULL);
 	size1 = ft_strlen(s1);
 	size2 = ft_strlen(s2);
+	//printf("\n=====Size2: %d\n", size2);
+	//printf("=====Sz2: %ld\n", sz2);
 	if (sz2 > 0)
 		size2 = sz2;
 	size = size1 + size2 + 1;
 	if (!(new = (char *)malloc(sizeof(char) * size)))
 		return (NULL);
 	ft_strlcpy(new, s1, size1 + 1);
-	ft_strlcat(new + size1, s2, size2 + 1);
+	ft_strlcpy(new + size1, s2, size2 + 1);
+	//printf("\n=====New: %s|\n", new);
 	free(s1);
 	return (new);
 }
@@ -83,11 +86,13 @@ char		*ft_strdup(const char *s1)
 	int		x;
 	int		size;
 
-	while (s1[size])
-		size++;
-	dest = (char *)malloc(sizeof(char) * (size + 1));
-	if (!(dest))
+	size = ft_strlen(s1);
+
+	if (!(dest = malloc(sizeof(char) * (size + 1)))){
+		printf("\n====Size: %d", size);
+		printf("\n=====AAAAA\n");
 		return (NULL);
+	}
 	x = 0;
 	while (s1[x])
 	{

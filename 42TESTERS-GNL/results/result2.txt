@@ -4,135 +4,70 @@
 ==========================================
 
 |AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa
-
 |BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBb
-
 |CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCc
-
 |DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDd
-
 |EEEEEEEEEEEEEEEEEEEEEEEEEEEEEe
-
 |FFFFFFFFFFFFFFFFFFFFFFFFFFFFf
-
 |GGGGGGGGGGGGGGGGGGGGGGGGGGGg
-
 |HHHHHHHHHHHHHHHHHHHHHHHHHHh
-
 |IIIIIIIIIIIIIIIIIIIIIIIIIi
-
 |JJJJJJJJJJJJJJJJJJJJJJJJj
-
 |KKKKKKKKKKKKKKKKKKKKKKKk
-
 |LLLLLLLLLLLLLLLLLLLLLLl
-
 |MMMMMMMMMMMMMMMMMMMMMm
-
 |NNNNNNNNNNNNNNNNNNNNn
-
 |OOOOOOOOOOOOOOOOOOOo
-
 |PPPPPPPPPPPPPPPPPPp
-
 |QQQQQQQQQQQQQQQQQq
-
 |RRRRRRRRRRRRRRRRr
-
 |SSSSSSSSSSSSSSSs
-
 |TTTTTTTTTTTTTTt
-
 |UUUUUUUUUUUUUu
-
 |VVVVVVVVVVVVv
-
 |WWWWWWWWWWWw
-
 |XXXXXXXXXXx
-
 |YYYYYYYYYy
-
 |ZZZZZZZZz
-
 |AAAAAAAa
-
 |BBBBBBb
-
 |CCCCCc
-
 |DDDDd
-
 |EEEe
-
 |FFf
-
 |Gg
-
 |h
-
 |Ii
-
 |JJj
-
 |KKKk
-
 |LLLLl
-
 |MMMMMm
-
 |NNNNNNn
-
 |OOOOOOOo
-
 |PPPPPPPPp
-
 |QQQQQQQQQq
-
 |RRRRRRRRRRr
-
 |SSSSSSSSSSSs
-
 |TTTTTTTTTTTTt
-
 |UUUUUUUUUUUUUu
-
 |VVVVVVVVVVVVVVv
-
 |WWWWWWWWWWWWWWWw
-
 |XXXXXXXXXXXXXXXXx
-
 |YYYYYYYYYYYYYYYYYy
-
 |ZZZZZZZZZZZZZZZZZZz
-
 |AAAAAAAAAAAAAAAAAAAa
-
 |BBBBBBBBBBBBBBBBBBBBb
-
 |CCCCCCCCCCCCCCCCCCCCCc
-
 |DDDDDDDDDDDDDDDDDDDDDDd
-
 |EEEEEEEEEEEEEEEEEEEEEEEe
-
 |FFFFFFFFFFFFFFFFFFFFFFFFf
-
 |GGGGGGGGGGGGGGGGGGGGGGGGGg
-
 |HHHHHHHHHHHHHHHHHHHHHHHHHHh
-
 |IIIIIIIIIIIIIIIIIIIIIIIIIIIi
-
 |JJJJJJJJJJJJJJJJJJJJJJJJJJJJj
-
 |KKKKKKKKKKKKKKKKKKKKKKKKKKKKKk
-
 |LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLl
-
 |MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMm
-
 |NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNn
 
 Right number of lines
@@ -141,22 +76,14 @@ Right number of lines
 ========= TEST 2 : Empty Lines ===========
 ==========================================
 
-|NCette ligne se termine par un point.
-
+|Cette ligne se termine par un point.
 |La ligne suivante est vide.
-
 |
-
 |Les 2 lignes suivantes sont vides
-
 |
-
 |
-
 |Et encore les 2 suivantes.
-
 |
-
 |
 
 Right number of lines
@@ -174,7 +101,6 @@ Right number of lines
 ==========================================
 
 |
-
 |
 
 Right number of lines
@@ -184,13 +110,9 @@ Right number of lines
 ==========================================
 
 |
-
 |
-
 |
-
 |
-
 |
 
 Right number of lines
@@ -210,53 +132,29 @@ Right number of lines
 ==========================================
 
    OOOO
-
  OOOOOOOOO
-
 OOOOOOOOOOOO
-
 OOOOOOOOOOOOO
-
 OOOOOOOOOOOOOO
-
 OOOOOOOOOOOOOO
-
  OOOOOOOOOOOOOO
-
  OOOOOOOOOOOOOO
-
  OOOOOOOOOOOOOO
-
   OOOOOOOOOOOOOO
-
   OOOOOOOOOOOOOO
-
   OOOOOOOOOOOOOO
-
   OOOOOOOOOOOOOO
-
    OOOOOOOOOOOOOO
-
    OOOOOOOOOOOOOO
-
    OOOOO \_| \_|O
-
    OOOO \/  \/  \
-
    OOOO (o   )o  )
-
    O/c   \__/ --.
-
    O\_   ,     -'
-
     O|  '\_______)
-
      |       _)
-
      |      |
-
      oooooooo
-
     /        \
 
 Right number of lines
