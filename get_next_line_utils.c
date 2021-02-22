@@ -66,8 +66,8 @@ char				*ft_strjoin_free1(char *s1, char const *s2, size_t sz2){
 		return (NULL);
 	size1 = ft_strlen(s1);
 	size2 = ft_strlen(s2);
-	//printf("\n=====Size2: %d\n", size2);
-	//printf("=====Sz2: %ld\n", sz2);
+	//printf("\n----------------S1: %s\n//", s1);
+	//printf("-----------------S2: %s\n//", s2);
 	if (sz2 > 0)
 		size2 = sz2;
 	size = size1 + size2 + 1;
@@ -86,7 +86,7 @@ char		*ft_strdup(const char *s1)
 	int		x;
 	int		size;
 
-	size = ft_strlen(s1);
+	size = (int)ft_strlen(s1);
 
 	if (!(dest = malloc(sizeof(char) * (size + 1)))){
 		printf("\n====Size: %d", size);

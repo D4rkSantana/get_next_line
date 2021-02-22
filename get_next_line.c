@@ -45,7 +45,8 @@ static int  get_result(int return_read, char *buff_total, char **r){
     int     index_n;
     char    *result;
     
-    //printf("\nEXQUEREEEEEE\n");
+    //printf("\nBUFF_TOTAL: %s||\n", buff_total);
+    //printf("\nreturn_read: %d\n", return_read);
     if (return_read >= 1)
         index_n = linebreak(buff_total);
     else {
@@ -67,7 +68,7 @@ static int  get_line(int fd, const char *save, char **bf_t){
     if (!(buff = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1))))
         return (-1);
     return_read = 1;
-    //printf("\nSAVE: %s\n", save);
+    //printf("\n-----\nSAVE: %s\n-----\n", save);
     if (save != NULL){
         ft_strlcpy(buff, save, ft_strlen(save) + 1);
         buff_total = ft_strdup(buff);
@@ -80,15 +81,17 @@ static int  get_line(int fd, const char *save, char **bf_t){
         //printf("\nBUFF_TOTAL: %s\n", buff_total);
     }
     while (linebreak(buff_total) == -1 && return_read > 0){
-        free(buff);
-        if (!(buff = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1))))
-            return (-1);
+        //free(buff);
+        //if (!(buff = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1))))
+        //    return (-1);
         return_read = read(fd, buff, BUFFER_SIZE);
-        //printf("\n====BUFF: %s\n", buff);
-        //printf("====BUFF_TOTAL: %s\n", buff_total);
+        //printf("\n=========\nBUFF: %s\n||", buff);
+        //printf("\nBUFF_TOTAL: %s\n=========\n", buff_total);
         if (return_read >= 1)
             buff_total = ft_strjoin_free1(buff_total, buff, return_read);
+        
     }
+    //printf("\nBUFF_TOTAL: %s||\n", buff_total);
     //*bf = buff;
     free(buff);
     *bf_t = buff_total;
@@ -112,6 +115,8 @@ int             get_next_line(int fd, char **line){
         return (-1);
     if (return_read > 0)
         save = ft_strindexcpy(buff_total, index_n);
+    //printf("\n++++++\nEXT 1: %s|\nSave: %s|\n++++++\n", buff_total, save);
+    //printf("\n++++++\nEXT 2: %s|\n++++++\n", buff_total);
     //free(buff_total);
     //printf("\n======Result: %s\n", result);
     //printf("======Return_read: %d\n", return_read);
