@@ -6,16 +6,20 @@
 /*   By: esilva-s <esilva-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 11:42:10 by esilva-s          #+#    #+#             */
-/*   Updated: 2021/02/22 14:08:43 by esilva-s         ###   ########.fr       */
+/*   Updated: 2021/02/23 16:58:09 by esilva-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdlib.h>
 
-static int  linebreak(char * str){
+int  linebreak(char * str){
     int     count;
 
+    /**
+     * Esse programa retorna o index de onde esta o \n
+     * com 
+    **/
     count = 0;
     while (str[count])
     {
