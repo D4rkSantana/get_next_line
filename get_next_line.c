@@ -6,7 +6,7 @@
 /*   By: esilva-s <esilva-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/04 11:42:10 by esilva-s          #+#    #+#             */
-/*   Updated: 2021/02/23 16:58:09 by esilva-s         ###   ########.fr       */
+/*   Updated: 2021/02/24 09:27:36 by esilva-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int  linebreak(char * str){
     return (-1);
 }
 
-static char *ft_strindexcpy(const char * str, size_t index){
+char *ft_strindexcpy(const char * str, size_t index){
 	size_t  count;
 	char    *dst;
 
