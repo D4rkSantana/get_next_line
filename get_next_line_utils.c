@@ -66,8 +66,6 @@ char				*ft_strjoin_free1(char *s1, char const *s2, size_t sz2){
 		return (NULL);
 	size1 = ft_strlen(s1);
 	size2 = ft_strlen(s2);
-	//printf("\n----------------S1: %s\n//", s1);
-	//printf("-----------------S2: %s\n//", s2);
 	if (sz2 > 0)
 		size2 = sz2;
 	size = size1 + size2 + 1;
@@ -75,7 +73,6 @@ char				*ft_strjoin_free1(char *s1, char const *s2, size_t sz2){
 		return (NULL);
 	ft_strlcpy(new, s1, size1 + 1);
 	ft_strlcpy(new + size1, s2, size2 + 1);
-	//printf("\n=====New: %s|\n", new);
 	free(s1);
 	return (new);
 }
