@@ -3,6 +3,25 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+static int  linebreak(char * str){
+    int     count;
+
+    /**
+     * Esse programa retorna o index de onde esta o \n
+     * com o padrão de 0 - 10
+     * 
+     * caso não exista um \n ele retorna -1
+    **/
+    count = 0;
+    while (str[count])
+    {
+        if(str[count] == '\n')
+            return (count);
+        count++;
+    }
+    return (-1);
+}
+
 static size_t	ft_strlen(const char *s)
 {
 	size_t	i;
@@ -63,7 +82,7 @@ static char *ft_strindexcpy(char **save, char * str, size_t index){
 	    index++;
 	    count++;
 	}
-    dst[count] = '\0';
+    dst[count + 1] = '\0';
     *save = dst;
 	return (dst);
 }
@@ -78,18 +97,24 @@ static int      get_line(int fd, char *save, char **temp){
     return_read = 1;
     if (save == NULL)
         return_read = read(fd, line, BUFFER_SIZE);
-    else (){
+    else{
         ft_strlcpy(line, save, ft_strlen(save));
     }
-    while (linebreak(line) == -1 && return_read == 1)
+    printf("\n----\npre-loop\n");
+    printf("pre-line: %s\n", line);
+    while (linebreak(line) == -1 && return_read > 0)
     {
+        printf("\nloop\n");
         return_read = read(fd, buff, BUFFER_SIZE);
         if (return_read == -1)
             return (-1);
         if (return_read > 0)
             line = ft_strjoin_free1(line, buff, return_read);
+        printf("loop-line: %s\n", line);
     }
     free(buff);
+    printf("\nend\n");
+    printf("end-line: %s\n", line);
     *temp = line;
     return (return_read);
 }
@@ -102,7 +127,7 @@ static char     *get_result(char *temp, char **save){
     if (index != -1)
         if (save != NULL)
         free(*save);
-        save = ft_strindexcpy(&save, temp, index);
+        *save = ft_strindexcpy(save, temp, index + 1);
     line = (char *)malloc(sizeof(char) * (index + 1));
     ft_strlcpy(line, temp, index + 1);
     return(line);
@@ -111,6 +136,7 @@ static char     *get_result(char *temp, char **save){
 static int      get_next_line(int fd, char **line){
     static char *save;
     char        *temp;
+    char        *result;
     int         count;
     int         return_read;
 
@@ -124,11 +150,30 @@ static int      get_next_line(int fd, char **line){
             count++;
         }
     }
-    *line = get_result(temp, &save)
+    *line = get_result(temp, &save);
+    //printf("\nTemp: %s=\n", temp);
+    //printf("\nSave: %s=\n", save);
     free(temp);
     if (return_read == 0){
         free(save);
         return (0);
     }
-    return(read_return);
+    return(return_read);
+}
+
+int main(){
+    int fd;
+    int retorno;
+    char *line;
+
+    retorno = 1;
+    fd = open("texto.txt", O_RDONLY);
+    while(retorno > 0){
+        retorno = get_next_line(fd, &line);
+        //printf("Resultado: %s|\n", line);
+        //printf("Retorno: %d\n==========\n", retorno);
+    }
+    //printf("Resultado final: %s|", line);
+    close(fd);
+    return (0);
 }
