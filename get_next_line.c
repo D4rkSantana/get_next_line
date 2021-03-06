@@ -1,128 +1,105 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: esilva-s <esilva-s@student.42sp.org.br>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/04 11:42:10 by esilva-s          #+#    #+#             */
-/*   Updated: 2021/02/26 15:51:32 by esilva-s         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "get_next_line.h"
-#include <stdlib.h>
 
-static int  linebreak(char * str){
-    int     count;
+char    *ft_strjoin_free1(char *s1, char const *s2, size_t size2){
+	unsigned int	size;
+	unsigned int	size1;
+	char			*new;
 
-    /**
-     * Esse programa retorna o index de onde esta o \n
-     * com o padrão de 0 - 10
-     * 
-     * caso não exista um \n ele retorna -1
-    **/
-    count = 0;
-    while (str[count])
-    {
-        if(str[count] == '\n')
-            return (count + 1);
-        count++;
-    }
-    return (-1);
+	if (!s1 || !s2)
+		return (NULL);
+	size1 = ft_strlen(s1);
+	size = size1 + size2 + 1;
+	if (!(new = (char *)calloc(sizeof(char), size)))
+		return (NULL);
+	ft_strlcpy(new, s1, size1 + 1); 
+	ft_strlcpy(new + size1, s2, size2 + 1);
+	ft_strdel(&s1);
+	return (new);
 }
 
-static char *ft_strindexcpy(char **save, char * str, size_t index){
+char    *ft_strindexcpy(char **save, char * str, size_t index){
 	size_t  count;
 	char    *dst;
 
-    /**
-     * Semelhante ao ft_strncpy, porem copia a partir
-     * da posição indicada e aloca espaço.
-     * 
-     * recebe o index no padrão 1 - 10
-     * 
-     * retorna o ponteiro da string que recebeu o conteudo
-    **/
 	count = 0;
-	dst = malloc(sizeof(char) * (ft_strlen(str) - index));
+	dst = (char *)calloc(sizeof(char), ft_strlen(str) - (index));
 	while (count < ft_strlen(str) && index < ft_strlen(str)){
 	    dst[count] = str[index];
 	    index++;
 	    count++;
 	}
     dst[count] = '\0';
-    if (save != NULL)
-        free(*save);
     *save = dst;
 	return (dst);
 }
 
-static int  get_result(int return_read, char *buff_total, char **r){
-    int     index_n;
-    char    *result;
+int     get_line(int fd, char *save, char **temp){
+    int         return_read;
+    char        *buff;
+    char        *line;
 
-    if (return_read >= 1)
-        index_n = linebreak(buff_total);
-    else {
-        index_n = ft_strlen(buff_total) + 1;
-    }
-    if (!(result = (char *)malloc(sizeof(char) * index_n + 1)))
+    buff = (char *)calloc(sizeof(char), BUFFER_SIZE + 1);
+    line = (char *)calloc(sizeof(char), BUFFER_SIZE + 1);
+    if ((!(buff)) || (!(line)))
         return (-1);
-    ft_strlcpy(result, buff_total, index_n);
-
-    *r = result;
-    return (index_n);
-}
-
-static int  get_line(int fd, const char *save, char **bf_t){
-    int     return_read;
-    char    *buff;
-    char    *buff_total;
-
-    if (!(buff = (char *)malloc(sizeof(char) * BUFFER_SIZE )))
-        return (-1);
+    buff[BUFFER_SIZE] = '\0';
+    line[BUFFER_SIZE] = '\0';
     return_read = 1;
-    if (save != NULL){
-        ft_strlcpy(buff, save, ft_strlen(save) + 1);
-        buff_total = ft_strdup(buff);
-    } else {
-        return_read = read(fd, buff, BUFFER_SIZE);
-        buff_total = ft_strdup(buff);
+    if (save == NULL)
+        return_read = read(fd, line, BUFFER_SIZE);
+    else{
+        ft_strlcpy(line, save, ft_strlen(save) + 1);
     }
-    while (linebreak(buff_total) == -1 && return_read > 0){
-        free(buff);
-        if (!(buff = (char *)malloc(sizeof(char) * BUFFER_SIZE)))
+    while (ft_linebreak(line) == -1 && return_read > 0)
+    {
+        return_read = read(fd, buff, BUFFER_SIZE);
+        if (return_read == -1)
             return (-1);
-        return_read = read(fd, buff, BUFFER_SIZE);
-        if (return_read >= 1)
-            buff_total = ft_strjoin_free1(buff_total, buff, return_read);
+        if (return_read > 0)
+            line = ft_strjoin_free1(line, buff, return_read);
     }
-    free(buff);
-    *bf_t = buff_total;
+    ft_strdel(&buff);
+    *temp = line;
     return (return_read);
 }
 
-int             get_next_line(int fd, char **line){
-    static char *save;
-    char        *buff_total;
-    char        *result;
-    int         return_read;
-    int         index_n;
+char    *get_result(int r_read, char *temp, char **save){
+    char *line;
+    int index;
 
-    
+    if (r_read > 0)
+        index = ft_linebreak(temp);
+    else {
+        index = ft_strlen(temp);
+    }
+    if (ft_linebreak(temp) != -1){
+        if (save != NULL)
+        ft_strdel(save);
+        *save = ft_strindexcpy(save, temp, index + 1);
+    }
+    if (!(line = (char *)calloc(sizeof(char), index + 1)))
+        return (NULL);
+    ft_strlcpy(line, temp, index + 1);
+    return(line);
+}
+
+int     get_next_line(int fd, char **line){
+    static char *save;
+    char        *temp;
+    int         return_read;
+
     if (fd < 0 || !line || BUFFER_SIZE <= 0)
 		return (-1);
-    if ((return_read = get_line(fd, save, &buff_total)) < 0)
+    return_read = get_line(fd, save, &temp);
+    if (return_read == -1)
         return (-1);
-    if ((index_n = get_result(return_read, buff_total, &result)) < 0)
+    *line = get_result(return_read, temp, &save);
+    if (*line == NULL)
         return (-1);
-    if (return_read > 0)
-        ft_strindexcpy(&save, buff_total, index_n);
-    *line = result;
+    ft_strdel(&temp);
     if (return_read == 0){
-        *save = 0;
+        ft_strdel(&save);
         return (0);
     }
-    return (1);
+    return(1);
 }

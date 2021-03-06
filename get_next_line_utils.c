@@ -1,7 +1,48 @@
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
-{
+void	ft_strdel(char **pont){
+	if (pont != NULL)
+	{
+		free(*pont);
+		*pont = NULL;
+	}
+}
+
+int		ft_linebreak(char * str){
+    int     count;
+
+    /**
+     * Esse programa retorna o index de onde esta o \n
+     * com o padrão de 0 - 10
+     * 
+     * caso não exista um \n ele retorna -1
+    **/
+    count = 0;
+    while (str[count])
+    {
+        if(str[count] == '\n')
+            return (count);
+        count++;
+    }
+    return (-1);
+}
+
+void	*ft_calloc(size_t count, size_t size){
+	char 	*str;
+    size_t  x;
+
+    x = 0;
+	if (!(str = malloc(count * size)))
+		return (0);
+	while (x < (count * size))
+	{
+		str[x] = 0;
+		x++;
+	}
+	return ((void *)str);
+}
+
+size_t	ft_strlen(const char *s){
 	size_t	i;
 
 	i = 0;
@@ -10,8 +51,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize)
-{
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize){
 	size_t	count;
 	size_t	len;
 
@@ -30,72 +70,4 @@ size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	}
 	dst[count] = '\0';
 	return (len);
-}
-
-size_t		ft_strlcat(char *dst, const char *src, size_t dstsize)
-{
-	size_t	i;
-	size_t	j;
-	size_t	dstlen;
-	size_t	srclen;
-
-	i = 0;
-	j = 0;
-	dstlen = ft_strlen(dst);
-	srclen = ft_strlen(src);
-	if (dstsize <= dstlen)
-		return (srclen + dstsize);
-	while (dst[i] != '\0' && i < (dstsize - 1))
-		i++;
-	while (src[j] && i + j + 1 < dstsize)
-	{
-		dst[i + j] = src[j];
-		j++;
-	}
-	dst[i + j] = '\0';
-	return (dstlen + srclen);
-}
-
-char				*ft_strjoin_free1(char *s1, char const *s2, size_t sz2){
-	unsigned int	size;
-	unsigned int	size1;
-	unsigned int	size2;
-	char			*new;
-
-	if (!s1 || !s2)
-		return (NULL);
-	size1 = ft_strlen(s1);
-	size2 = ft_strlen(s2);
-	if (sz2 > 0)
-		size2 = sz2;
-	size = size1 + size2 + 1;
-	if (!(new = (char *)malloc(sizeof(char) * size)))
-		return (NULL);
-	ft_strlcpy(new, s1, size1 + 1);
-	ft_strlcpy(new + size1, s2, size2 + 1);
-	free(s1);
-	return (new);
-}
-
-char		*ft_strdup(const char *s1)
-{
-	char	*dest;
-	int		x;
-	int		size;
-
-	size = (int)ft_strlen(s1);
-
-	if (!(dest = malloc(sizeof(char) * (size + 1)))){
-		printf("\n====Size: %d", size);
-		printf("\n=====AAAAA\n");
-		return (NULL);
-	}
-	x = 0;
-	while (s1[x])
-	{
-		dest[x] = s1[x];
-		x++;
-	}
-	dest[x] = '\0';
-	return (dest);
 }
