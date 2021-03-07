@@ -20,7 +20,7 @@ static char    *ft_strjoin_free1(char *s1, char const *s2, size_t size2){
 static char    *ft_strindexcpy(char **save, char * str, size_t index){
 	size_t  count;
 	char    *dst;
-    int     size;
+    	size_t	size;
 
 	count = 0;
     size = ft_strlen(str);
