@@ -34,7 +34,7 @@ void	*ft_calloc(size_t count, size_t size){
     x = 0;
 	if (!(str = malloc(count * size)))
 		return (0);
-	while (x < (count * size))
+	while ((x < (count * size)) && (x < 10))
 	{
 		str[x] = 0;
 		x++;
