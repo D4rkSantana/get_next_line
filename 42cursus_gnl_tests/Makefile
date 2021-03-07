@@ -1,5 +1,5 @@
 # get next line folder, where are your files located?
-GET_NEXT_LINE_FOLDER=../
+GET_NEXT_LINE_FOLDER=./get_next_line
 
 # test bonus?
 # set to 'yes' or 'no'

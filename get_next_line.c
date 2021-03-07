@@ -22,7 +22,7 @@ char    *ft_strindexcpy(char **save, char * str, size_t index){
 	char    *dst;
 
 	count = 0;
-	dst = (char *)calloc(sizeof(char), ft_strlen(str) - (index));
+	dst = (char *)calloc(sizeof(char), (ft_strlen(str) - (index)) + 1);
 	while (count < ft_strlen(str) && index < ft_strlen(str)){
 	    dst[count] = str[index];
 	    index++;
