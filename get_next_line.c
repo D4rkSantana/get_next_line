@@ -20,10 +20,12 @@ static char    *ft_strjoin_free1(char *s1, char const *s2, size_t size2){
 static char    *ft_strindexcpy(char **save, char * str, size_t index){
 	size_t  count;
 	char    *dst;
+    int     size;
 
 	count = 0;
-	dst = (char *)ft_calloc(sizeof(char), (ft_strlen(str) - (index)) + 1);
-	while (count < ft_strlen(str) && index < ft_strlen(str)){
+    size = ft_strlen(str);
+	dst = (char *)ft_calloc(sizeof(char), (size - (index)) + 1);
+	while (count < size && index < size){
 	    dst[count] = str[index];
 	    index++;
 	    count++;
@@ -55,9 +57,11 @@ static int     get_line(int fd, char *save, char **temp){
         return_read = read(fd, buff, BUFFER_SIZE);
         if (return_read == -1)
             return (-1);
+        buff[return_read] = '\0';
         if (return_read > 0)
             line = ft_strjoin_free1(line, buff, return_read);
     }
+    
     ft_strdel(&buff);
     *temp = line;
     return (return_read);
@@ -88,15 +92,19 @@ int     get_next_line(int fd, char **line){
     char        *temp;
     int         return_read;
 
+    //printf("\nEtapa1");
     if (fd < 0 || !line || BUFFER_SIZE <= 0)
 		return (-1);
     return_read = get_line(fd, save, &temp);
+    //printf("\nEtapa2");
     if (return_read == -1)
         return (-1);
     *line = get_result(return_read, temp, &save);
+    //printf("\nEtapa3");
     if (*line == NULL)
         return (-1);
     ft_strdel(&temp);
+    //printf("\nEtapa4");
     if (return_read == 0){
         ft_strdel(&save);
         return (0);
