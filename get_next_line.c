@@ -49,9 +49,8 @@ static int     get_line(int fd, char *save, char **temp){
     return_read = 1;
     if (save == NULL)
         return_read = read(fd, line, BUFFER_SIZE);
-    else{
+    else
         ft_strlcpy(line, save, ft_strlen(save) + 1);
-    }
     while (ft_linebreak(line) == -1 && return_read > 0)
     {
         return_read = read(fd, buff, BUFFER_SIZE);
@@ -61,7 +60,6 @@ static int     get_line(int fd, char *save, char **temp){
         if (return_read > 0)
             line = ft_strjoin_free1(line, buff, return_read);
     }
-    
     ft_strdel(&buff);
     *temp = line;
     return (return_read);
@@ -92,19 +90,17 @@ int     get_next_line(int fd, char **line){
     char        *temp;
     int         return_read;
 
-    //printf("\nEtapa1");
     if (fd < 0 || !line || BUFFER_SIZE <= 0)
 		return (-1);
     return_read = get_line(fd, save, &temp);
-    //printf("\nEtapa2");
-    if (return_read == -1)
+    if (return_read == -1){
+        ft_strdel(&temp);
         return (-1);
+    }
     *line = get_result(return_read, temp, &save);
-    //printf("\nEtapa3");
     if (*line == NULL)
         return (-1);
     ft_strdel(&temp);
-    //printf("\nEtapa4");
     if (return_read == 0){
         ft_strdel(&save);
         return (0);
