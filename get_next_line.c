@@ -1,6 +1,6 @@
 #include "get_next_line.h"
 
-static char    *ft_strjoin_free1(char *s1, char const *s2, size_t size2){
+static char         *ft_strjoin_free1(char *s1, char const *s2, size_t size2){
 	unsigned int	size;
 	unsigned int	size1;
 	char			*new;
@@ -17,10 +17,10 @@ static char    *ft_strjoin_free1(char *s1, char const *s2, size_t size2){
 	return (new);
 }
 
-static char    *ft_strindexcpy(char **save, char * str, size_t index){
-	size_t  count;
-	char    *dst;
-    	size_t	size;
+static char         *ft_strindexcpy(char **save, char * str, size_t index){
+	size_t          count;
+	char            *dst;
+    size_t          size;
 
 	count = 0;
     size = ft_strlen(str);
@@ -35,10 +35,10 @@ static char    *ft_strindexcpy(char **save, char * str, size_t index){
 	return (dst);
 }
 
-static int     get_line(int fd, char *save, char **temp){
-    int         return_read;
-    char        *buff;
-    char        *line;
+static int          get_line(int fd, char *save, char **temp){
+    int             return_read;
+    char            *buff;
+    char            *line;
 
     buff = (char *)ft_calloc(sizeof(char), BUFFER_SIZE + 1);
     line = (char *)ft_calloc(sizeof(char), BUFFER_SIZE + 1);
@@ -65,9 +65,9 @@ static int     get_line(int fd, char *save, char **temp){
     return (return_read);
 }
 
-static char    *get_result(int r_read, char *temp, char **save){
-    char *line;
-    int index;
+static char         *get_result(int r_read, char *temp, char **save){
+    char            *line;
+    int             index;
 
     if (r_read > 0)
         index = ft_linebreak(temp);
@@ -76,7 +76,7 @@ static char    *get_result(int r_read, char *temp, char **save){
     }
     if (ft_linebreak(temp) != -1){
         if (save != NULL)
-        ft_strdel(save);
+            ft_strdel(save);
         *save = ft_strindexcpy(save, temp, index + 1);
     }
     if (!(line = (char *)ft_calloc(sizeof(char), index + 1)))
@@ -85,10 +85,10 @@ static char    *get_result(int r_read, char *temp, char **save){
     return(line);
 }
 
-int     get_next_line(int fd, char **line){
-    static char *save;
-    char        *temp;
-    int         return_read;
+int                 get_next_line(int fd, char **line){
+    static char     *save;
+    char            *temp;
+    int             return_read;
 
     if (fd < 0 || !line || BUFFER_SIZE <= 0)
 		return (-1);
