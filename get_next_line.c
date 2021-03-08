@@ -6,7 +6,7 @@
 /*   By: esilva-s <esilva-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 16:07:55 by esilva-s          #+#    #+#             */
-/*   Updated: 2021/03/08 16:43:14 by esilva-s         ###   ########.fr       */
+/*   Updated: 2021/03/08 13:05:48 by esilva-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ static int			get_line(int fd, char *save, char **temp)
 	line = (char *)ft_calloc(sizeof(char), BUFFER_SIZE + 1);
 	if ((!(buff)) || (!(line)))
 		return (-1);
-	buff[BUFFER_SIZE] = '\0';
-	line[BUFFER_SIZE] = '\0';
 	return_read = 1;
 	if (save == NULL)
 		return_read = read(fd, line, BUFFER_SIZE);

@@ -6,7 +6,7 @@
 /*   By: esilva-s <esilva-s@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 15:57:52 by esilva-s          #+#    #+#             */
-/*   Updated: 2021/03/08 16:07:21 by esilva-s         ###   ########.fr       */
+/*   Updated: 2021/03/08 13:26:05 by esilva-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,15 @@ void		*ft_calloc(size_t count, size_t size)
 {
 	char	*str;
 	size_t	x;
+	size_t	s_total;
 
 	x = 0;
-	if (!(str = malloc(count * size)))
+	s_total = count * size;
+	if (!(str = malloc(s_total)))
 		return (0);
-	while ((x < (count * size)) && (x < 10))
+	if (s_total > 10000)
+		x = s_total - 9000;
+	while (x < s_total)
 	{
 		str[x] = 0;
 		x++;
