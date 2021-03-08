@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: esilva-s <esilva-s@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/08 15:57:52 by esilva-s          #+#    #+#             */
+/*   Updated: 2021/03/08 16:07:21 by esilva-s         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
-void		ft_strdel(char **pont){
+void		ft_strdel(char **pont)
+{
 	if (pont != NULL)
 	{
 		free(*pont);
@@ -8,24 +21,26 @@ void		ft_strdel(char **pont){
 	}
 }
 
-int			ft_linebreak(char * str){
-    int     count;
+int			ft_linebreak(char *str)
+{
+	int		count;
 
-    count = 0;
-    while (str[count])
-    {
-        if (str[count] == '\n')
-            return (count);
-        count++;
-    }
-    return (-1);
+	count = 0;
+	while (str[count])
+	{
+		if (str[count] == '\n')
+			return (count);
+		count++;
+	}
+	return (-1);
 }
 
-void		*ft_calloc(size_t count, size_t size){
-	char 	*str;
-    size_t  x;
+void		*ft_calloc(size_t count, size_t size)
+{
+	char	*str;
+	size_t	x;
 
-    x = 0;
+	x = 0;
 	if (!(str = malloc(count * size)))
 		return (0);
 	while ((x < (count * size)) && (x < 10))
@@ -36,7 +51,8 @@ void		*ft_calloc(size_t count, size_t size){
 	return ((void *)str);
 }
 
-size_t		ft_strlen(const char *s){
+size_t		ft_strlen(const char *s)
+{
 	size_t	i;
 
 	i = 0;
@@ -45,7 +61,8 @@ size_t		ft_strlen(const char *s){
 	return (i);
 }
 
-size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize){
+size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize)
+{
 	size_t	count;
 	size_t	len;
 
