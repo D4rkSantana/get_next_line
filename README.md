@@ -24,7 +24,7 @@ git clone https://github.com/D4rkSantana/get_next_line.git
 cd get_next_line
 ```
 ```
-gcc  **seu_programa.c** get_next_line.c get_next_line_utils.c get_next_line.h
+make
 ```
 
 ## Aprendizados
