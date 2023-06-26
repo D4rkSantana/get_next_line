@@ -35,8 +35,9 @@ Linguagem C, Uso de Arquivos em C, Variaveis Staticas, gerenciamento de memoria,
 ## Referência
 
  - [42 São Paulo](https://www.42sp.org.br/)
- - [stdlib.h — Linux manual page](https://man7.org/linux/man-pages/man0/stdlib.h.0p.html)
- - [unistd.h — Linux manual page](https://man7.org/linux/man-pages/man0/unistd.h.0p.html)
+ - [Modificadores de armazenamento na linguagem C](https://embarcados.com.br/modificadores-de-armazenamento-na-linguagem-c/)
+ - [read(2) — Linux manual page](https://man7.org/linux/man-pages/man2/read.2.html)
+ - [open(2) — Linux manual page](https://man7.org/linux/man-pages/man2/open.2.html)
 
 
 ## Uso/Exemplos
