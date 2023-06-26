@@ -9,6 +9,7 @@ O proposito desse projeto é compreender o funcionamento das variaveis staticas 
 ## Status
 
 Finalizado e Aprovado
+
 ![aprovado 100/100](docs/gnl_check.PNG)
 
 
